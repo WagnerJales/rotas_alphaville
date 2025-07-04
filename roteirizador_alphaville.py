@@ -1,0 +1,53 @@
+import streamlit as st
+import geopandas as gpd
+import folium
+import osmnx as ox
+import networkx as nx
+from shapely.geometry import Point
+from streamlit_folium import st_folium
+
+# Carregar shapefile
+gdf = gpd.read_file("pontos.shp")
+gdf["geometry"] = gdf["geometry"].apply(lambda geom: list(geom.geoms)[0] if geom.geom_type == "MultiPoint" else geom)
+
+# Definir CRS e converter
+gdf = gdf.set_crs("EPSG:4326")
+
+# Identificar portaria
+portaria = gdf[gdf['local'] == 'portaria'].iloc[0]
+
+# Baixar grafo de ruas com OSMnx (ajustar coordenadas conforme o condomínio)
+center_point = (portaria.geometry.y, portaria.geometry.x)
+G = ox.graph_from_point(center_point, dist=1000, network_type='drive')
+G = ox.project_graph(G)
+
+# Transformar pontos para mesmo CRS do grafo
+gdf = gdf.to_crs(G.graph['crs'])
+portaria_proj = gdf[gdf['local'] == 'portaria'].iloc[0]
+
+# Streamlit UI
+st.title("Roteirizador Alphaville com Ruas Reais")
+lote_id = st.number_input("Digite o número do lote:", min_value=1, step=1)
+
+if lote_id:
+    destino = gdf[gdf['id'] == lote_id]
+    if destino.empty:
+        st.error("Lote não encontrado.")
+    else:
+        destino_proj = destino.iloc[0]
+
+        # Encontrar nós mais próximos na rede
+        orig_node = ox.distance.nearest_nodes(G, portaria_proj.geometry.x, portaria_proj.geometry.y)
+        dest_node = ox.distance.nearest_nodes(G, destino_proj.geometry.x, destino_proj.geometry.y)
+
+        # Calcular rota
+        route = nx.shortest_path(G, orig_node, dest_node, weight='length')
+        route_coords = [(G.nodes[n]['y'], G.nodes[n]['x']) for n in route]
+
+        # Criar mapa
+        m = folium.Map(location=[portaria.geometry.y, portaria.geometry.x], zoom_start=16)
+        folium.Marker([portaria.geometry.y, portaria.geometry.x], tooltip="Portaria", icon=folium.Icon(color='green')).add_to(m)
+        folium.Marker([destino_proj.geometry.y, destino_proj.geometry.x], tooltip=f"Lote {lote_id}", icon=folium.Icon(color='blue')).add_to(m)
+        folium.PolyLine(route_coords, color='blue').add_to(m)
+
+        st_folium(m, width=700, height=500)
