@@ -1,13 +1,1 @@
-{
-"type": "FeatureCollection",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "id": 1, "local": "portaria" }, "geometry": { "type": "Point", "coordinates": [ -44.174276190290776, -2.47003900140087 ] } },
-{ "type": "Feature", "properties": { "id": 1, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.175366168293586, -2.46691742303236 ] } },
-{ "type": "Feature", "properties": { "id": 2, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.176391918823057, -2.46683815673894 ] } },
-{ "type": "Feature", "properties": { "id": 3, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.175779868783387, -2.469384112230025 ] } },
-{ "type": "Feature", "properties": { "id": 4, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.177914487748971, -2.468734884606573 ] } },
-{ "type": "Feature", "properties": { "id": 5, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.17748756395585, -2.466855142373641 ] } },
-{ "type": "Feature", "properties": { "id": 6, "local": null }, "geometry": { "type": "Point", "coordinates": [ -44.176541153246319, -2.472726497094239 ] } }
-]
-}
+{}
