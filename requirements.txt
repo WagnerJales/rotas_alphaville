@@ -2,7 +2,7 @@ osmnx
 networkx
 scipy
 numpy
-streamlit
 geopandas
 folium
+streamlit
 streamlit-folium
