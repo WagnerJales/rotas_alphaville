@@ -1,6 +1,8 @@
+osmnx
+networkx
+scipy
+numpy
 streamlit
 geopandas
 folium
-osmnx
-networkx
 streamlit-folium
