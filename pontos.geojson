@@ -1,0 +1,39 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "portaria",
+        "name": "Portaria Alphaville"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-47.0600, -22.9000]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "Lote 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-47.0650, -22.9050]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "name": "Lote 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-47.0550, -22.9100]
+      }
+    }
+  ]
+}
+
