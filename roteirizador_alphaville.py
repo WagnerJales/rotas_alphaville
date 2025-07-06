@@ -33,17 +33,20 @@ def carregar_pontos(arquivo_geojson):
             props = feature['properties']
             coords = feature['geometry']['coordinates']
             
+            # Usa 'name' se existir, senão usa o 'id'
+            nome = props.get('name', str(props['id']))
+            
             if props['id'] == 'portaria':
                 portaria = {
                     'lat': coords[1],
                     'lon': coords[0],
-                    'name': props['name']
+                    'name': nome
                 }
             else:
                 pontos[props['id']] = {
                     'lat': coords[1],
                     'lon': coords[0],
-                    'name': props['name']
+                    'name': nome
                 }
         
         return pontos, portaria
@@ -239,30 +242,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-# Streamlit UI
-st.title("Roteirizador Alphaville com Ruas Reais")
-lote_id = st.number_input("Digite o número do lote:", min_value=1, step=1)
-
-if lote_id:
-    destino = gdf[gdf['id'] == lote_id]
-    if destino.empty:
-        st.error("Lote não encontrado.")
-    else:
-        destino = destino.iloc[0]
-
-        # Encontrar nós mais próximos na rede (usando lon/lat)
-        orig_node = ox.distance.nearest_nodes(G, portaria.geometry.x, portaria.geometry.y)
-        dest_node = ox.distance.nearest_nodes(G, destino.geometry.x, destino.geometry.y)
-
-        # Calcular rota
-        route = nx.shortest_path(G, orig_node, dest_node, weight='length')
-        route_coords = [(G.nodes[n]['y'], G.nodes[n]['x']) for n in route]
-
-        # Criar mapa
-        m = folium.Map(location=[portaria.geometry.y, portaria.geometry.x], zoom_start=16)
-        folium.Marker([portaria.geometry.y, portaria.geometry.x], tooltip="Portaria", icon=folium.Icon(color='green')).add_to(m)
-        folium.Marker([destino.geometry.y, destino.geometry.x], tooltip=f"Lote {lote_id}", icon=folium.Icon(color='blue')).add_to(m)
-        folium.PolyLine(route_coords, color='blue').add_to(m)
-
-        st_folium(m, width=700, height=500)
