@@ -1,3 +1,4 @@
+
 import streamlit as st
 import json
 import osmnx as ox
@@ -36,7 +37,7 @@ def carregar_pontos(arquivo_geojson):
             # Usa 'name' se existir, senão usa o 'id'
             nome = props.get('name', str(props['id']))
             
-            if props['id'] == 'portaria':
+            if props['local'] == 'portaria':
                 portaria = {
                     'lat': coords[1],
                     'lon': coords[0],
