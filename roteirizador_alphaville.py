@@ -24,4 +24,4 @@ if os.path.exists(caminho):
 else:
     st.warning(f"Imagem para o Lote {lote_id} não encontrada ({nome_arquivo}).")
 
-st.image("logo.png", use_container_width=False, width=150)
+st.image("logo.jpg", use_container_width=False, width=150)
