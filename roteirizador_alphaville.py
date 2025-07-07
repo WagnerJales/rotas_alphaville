@@ -3,8 +3,8 @@ from PIL import Image
 import os
 
 st.set_page_config(page_title="Roteirizador Alphaville", layout="centered")
-st.title("📍 Roteirizador Alphaville por Imagem")
-st.markdown("Insira o número do lote para visualizar a rota pré-calculada.")
+st.title("📍 Rotas Aphaville")
+st.markdown("Insira o número do lote para visualizar a rota.")
 
 # Entrada do número do lote
 lote_id = st.number_input("Digite o número do lote:", min_value=1, step=1)
