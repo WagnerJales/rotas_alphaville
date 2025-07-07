@@ -16,6 +16,6 @@ caminho = os.path.join(".", nome_arquivo)
 # Verifica e exibe a imagem correspondente
 if os.path.exists(caminho):
     imagem = Image.open(caminho)
-    st.image(imagem, caption=f"Rota até o Lote {lote_id}", use_column_width=True)
+    st.image(imagem, caption=f"Rota até o Lote {lote_id}", use_container_width=True)
 else:
     st.warning(f"Imagem para o Lote {lote_id} não encontrada ({nome_arquivo}).")
