@@ -3,8 +3,8 @@ from PIL import Image
 import os
 
 st.set_page_config(page_title="Roteirizador Alphaville", layout="centered")
-st.title("📍 Roteirizador Alphaville por Imagem")
-st.markdown("Selecione o número do lote para visualizar a rota pré-calculada.")
+st.title("📍 Roteirizador Alphaville")
+st.markdown("Selecione o número do lote para visualizar a rota.")
 
 # Gera lista de imagens disponíveis (formato 001.png, 002.png, ...)
 arquivos = sorted([f for f in os.listdir(".") if f.endswith(".png") and f[:3].isdigit()])
@@ -23,3 +23,5 @@ if os.path.exists(caminho):
     st.image(imagem, caption=f"Rota até o Lote {lote_id}", use_container_width=True)
 else:
     st.warning(f"Imagem para o Lote {lote_id} não encontrada ({nome_arquivo}).")
+
+st.image("logo.png", use_container_width=False, width=150)
