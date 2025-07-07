@@ -23,5 +23,3 @@ if os.path.exists(caminho):
     st.image(imagem, caption=f"Rota até o Lote {lote_id}", use_container_width=True)
 else:
     st.warning(f"Imagem para o Lote {lote_id} não encontrada ({nome_arquivo}).")
-
-st.image("logo.jpg", use_container_width=False, width=150)
