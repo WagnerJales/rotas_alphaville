@@ -5,8 +5,8 @@ import pandas as pd
 
 st.set_page_config(page_title="Roteirizador Alphaville", layout="centered")
 
-st.title("📍 Roteirizador Alphaville por Imagem")
-st.markdown("Selecione o número do lote para visualizar a rota.")
+st.title("📍 Rotas Condominio")
+st.markdown("Condominio Alphaville.")
 
 # Lista de arquivos de rota disponíveis
 arquivos = sorted([f for f in os.listdir(".") if f.endswith(".png") and f[:3].isdigit()])
