@@ -8,7 +8,7 @@ st.set_page_config(page_title="Roteirizador Alphaville", layout="centered")
 # Centraliza e exibe a logo
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    st.image("logo.png", use_container_width=False, width=150)
+    st.image("logo.jpg", use_container_width=False, width=150)
 
 st.title("📍 Roteirizador Alphaville por Imagem")
 st.markdown("Selecione o número do lote para visualizar a rota.")
